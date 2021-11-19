@@ -1,0 +1,23 @@
+---
+
+name: Bump version
+on:
+  workflow_call:
+    inputs:
+      release_branches:
+        type: string
+        default: develop
+        requred: false
+    secrets:
+      github_token:
+        required: true
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: mathieudutour/github-tag-action@v5.6
+        with:
+          github_token: ${{ secrets.github_token }}
+          release_branches: ${{ inputs.release_branches }}
