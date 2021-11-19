@@ -1,0 +1,13 @@
+---
+
+name: Bump version
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  call-bump-version-workflow:
+    name: Call bump verion workflow
+    uses: cornbuddy/github-workflow-templates/.github/workflows-templates/bump-version.yml@develop
+    secrets:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
