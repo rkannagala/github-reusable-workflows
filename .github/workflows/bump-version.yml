@@ -6,8 +6,12 @@ on:
     branches:
       - develop
 jobs:
-  call-bump-version-workflow:
-    name: Call bump verion workflow
-    uses: cornbuddy/github-workflow-templates/.github/workflows-templates/bump-version.yml@develop
-    secrets:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: mathieudutour/github-tag-action@v5.6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: develop
